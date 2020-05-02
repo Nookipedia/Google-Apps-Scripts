@@ -10,7 +10,7 @@ function DownloadImages() {
   
   for(i = 0; i < lastRow - 1; i++) {
     if (searchValues[i][2]) {
-      var imgurl = searchValues[i][2]
+      var imgurl = searchValues[i][2];
       var image = UrlFetchApp.fetch(imgurl).getBlob().getAs('image/png').setName(toTitleCase(searchValues[i][0]) + ' NH Icon.png');
       var folder = DriveApp.getFolderById(FOLDERID);
       folder.createFile(image);

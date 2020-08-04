@@ -1,4 +1,4 @@
-function FetchNookipediaThumbs() {
+function GrabNookipediaImages() {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   var rangeData = sheet.getDataRange();
   var lastColumn = rangeData.getLastColumn();
@@ -18,6 +18,6 @@ function FetchNookipediaThumbs() {
 
   // Converts string to title case
   function toTitleCase(str) {
-    return str.replace(/(^|\s)\S/g, function(t) { return t.toUpperCase() });
+    return str.replace(/(^|\s|-)\S/g, function(t) { return t.toUpperCase() });
   }
 }

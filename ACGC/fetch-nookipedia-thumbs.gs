@@ -1,3 +1,12 @@
+/* 
+  Automatically find + place thumbnails from Nookipedia into the spreadsheet you are currently viewing.
+  Update the NAME_COLUMN, IMG_COLUMN, and FILE_SUFFIX below as needed.
+*/
+
+var NAME_COLUMN = 1    // 0 for column A, 1 for column B, etc.
+var IMG_COLUMN = 'C'
+var FILE_SUFFIX = '_PG_Field_Sprite.png'
+
 function GrabNookipediaImages() {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   var rangeData = sheet.getDataRange();
@@ -7,13 +16,13 @@ function GrabNookipediaImages() {
   var searchValues = searchRange.getValues();
   
   for(i = 0; i < lastRow - 1; i++) {
-    var imgurl = 'https://nookipedia.com/wiki/Special:Redirect/file/' + toTitleCase(searchValues[i][1]).replace(/ /g, "_") + '_PG_Icon.png';
+    var imgurl = 'https://nookipedia.com/wiki/Special:Redirect/file/' + toTitleCase(searchValues[i][NAME_COLUMN]).replace(/ /g, "_") + FILE_SUFFIX;
     var options = {
       'followRedirects': false,
       'muteHttpExceptions': true
     };
     var response = UrlFetchApp.fetch(imgurl, options).getHeaders();
-    sheet.getRange('C'.concat(i + 2)).setValue('=IMAGE("' + response['Location'] + '")');
+    sheet.getRange(IMG_COLUMN.concat(i + 2)).setValue('=IMAGE("' + response['Location'] + '")');
   }
 
   // Converts string to title case

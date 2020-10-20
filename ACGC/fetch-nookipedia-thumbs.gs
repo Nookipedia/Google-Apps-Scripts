@@ -22,7 +22,9 @@ function GrabNookipediaImages() {
       'muteHttpExceptions': true
     };
     var response = UrlFetchApp.fetch(imgurl, options).getHeaders();
-    sheet.getRange(IMG_COLUMN.concat(i + 2)).setValue('=IMAGE("' + response['Location'] + '")');
+    if(response['Location']) {
+      sheet.getRange(IMG_COLUMN.concat(i + 2)).setValue('=IMAGE("' + response['Location'] + '")');
+    }
   }
 
   // Converts string to title case

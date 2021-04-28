@@ -21,8 +21,9 @@ function DownloadImages() {
     var image2 = UrlFetchApp.fetch(imgurl2).getBlob().getAs('image/png').setName(toTitleCase(searchValues[i][0]) + variationName + ' NH Storage Icon.png');
     var folder = DriveApp.getFolderById(FOLDERID);
     folder.createFile(image);
-    folder.createFile(image2);
     console.log('Downloaded ' + toTitleCase(searchValues[i][0]) + variationName + ' NH Icon.png');
+    folder.createFile(image2);
+    console.log('Downloaded ' + toTitleCase(searchValues[i][0]) + variationName + ' NH Storage Icon.png');
     variationName = '';
   }
 }
